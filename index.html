@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trình chỉnh sửa ảnh Pro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-container">
+
+    <!-- Màn hình Tải ảnh ban đầu -->
+    <div id="upload-screen" class="screen active">
+        <div class="upload-content">
+            <h1 class="app-title">Trình chỉnh sửa ảnh</h1>
+            <div class="image-placeholder">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="placeholder-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                <p>Kéo và thả hoặc nhấp để tải ảnh lên</p>
+            </div>
+            <label for="imageUpload" class="upload-button">Chọn ảnh từ máy tính</label>
+            <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+        </div>
+    </div>
+
+    <!-- Màn hình Chỉnh sửa -->
+    <div id="editor-screen" class="screen">
+        <div class="editor-header">
+            <button id="backButton" class="header-button icon-button" aria-label="Quay lại">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <h2 class="editor-title">Bộ lọc & Điều chỉnh</h2>
+            <button id="saveButton" class="header-button save-button" aria-label="Lưu ảnh">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                <span>LƯU</span>
+            </button>
+        </div>
+
+        <div class="editor-main-content">
+            <div class="image-preview-container">
+                <canvas id="imageCanvas"></canvas>
+            </div>
+
+            <div class="controls-area">
+                <div class="edit-tabs">
+                    <button class="tab-button active" data-controls="rgb-controls">Màu sắc</button>
+                    <button class="tab-button" data-controls="basic-adjust-controls">Cơ bản</button>
+                    <button class="tab-button" data-controls="effects-controls">Hiệu ứng</button>
+                </div>
+
+                <div id="control-panels">
+                    <!-- RGB Controls -->
+                    <div id="rgb-controls" class="control-panel active">
+                        <p class="panel-description">Bật/tắt các kênh màu cơ bản.</p>
+                        <div class="control-group toggle-group">
+                            <div class="control-item toggle-control">
+                                <label for="redToggle">Đỏ</label>
+                                <label class="switch">
+                                    <input type="checkbox" id="redToggle" checked>
+                                    <span class="slider round red"></span>
+                                </label>
+                            </div>
+                            <div class="control-item toggle-control">
+                                <label for="greenToggle">Xanh lá</label>
+                                <label class="switch">
+                                    <input type="checkbox" id="greenToggle" checked>
+                                    <span class="slider round green"></span>
+                                </label>
+                            </div>
+                            <div class="control-item toggle-control">
+                                <label for="blueToggle">Xanh dương</label>
+                                <label class="switch">
+                                    <input type="checkbox" id="blueToggle" checked>
+                                    <span class="slider round blue"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Basic Adjustments Controls -->
+                    <div id="basic-adjust-controls" class="control-panel">
+                        <div class="control-group slider-group">
+                            <div class="control-item slider-control">
+                                <label for="brightnessSlider">Độ sáng</label>
+                                <div class="slider-wrapper">
+                                    <input type="range" id="brightnessSlider" min="0" max="200" value="100">
+                                    <span class="slider-value" id="brightnessValue">100%</span>
+                                </div>
+                            </div>
+                            <div class="control-item slider-control">
+                                <label for="contrastSlider">Tương phản</label>
+                                <div class="slider-wrapper">
+                                    <input type="range" id="contrastSlider" min="0" max="200" value="100">
+                                    <span class="slider-value" id="contrastValue">100%</span>
+                                </div>
+                            </div>
+                            <div class="control-item slider-control">
+                                <label for="saturationSlider">Bão hòa</label>
+                                <div class="slider-wrapper">
+                                    <input type="range" id="saturationSlider" min="0" max="200" value="100">
+                                    <span class="slider-value" id="saturationValue">100%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Effects Controls -->
+                    <div id="effects-controls" class="control-panel">
+                        <div class="control-group">
+                            <div class="control-item toggle-control">
+                                <label for="grayscaleToggle">Thang xám</label>
+                                <label class="switch">
+                                    <input type="checkbox" id="grayscaleToggle">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="control-group slider-group">
+                            <div class="control-item slider-control">
+                                <label for="posterizeSlider">Áp phích hóa</label>
+                                <div class="slider-wrapper">
+                                    <input type="range" id="posterizeSlider" min="0" max="16" value="0">
+                                    <span class="slider-value" id="posterizeValue">Tắt</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button id="resetButton" class="reset-button">Đặt lại điều chỉnh</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
