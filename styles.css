@@ -2,16 +2,16 @@
 :root {
     --font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --primary-bg: #ffffff;
-    --secondary-bg: #f7f8fc; /* Nền hơi xám cho vùng controls */
+    --secondary-bg: #f7f8fc;
     --border-color: #e8eaf0;
-    --text-primary: #2c3e50; /* Màu chữ chính đậm */
-    --text-secondary: #5a6a7d; /* Màu chữ phụ nhạt hơn */
-    --accent-color: #007aff; /* Màu nhấn (Apple Blue) */
+    --text-primary: #2c3e50;
+    --text-secondary: #5a6a7d;
+    --accent-color: #007aff;
     --accent-color-dark: #005ecb;
     --accent-color-light: #e0f1ff;
-    --danger-color: #e74c3c; /* Màu đỏ cho kênh Red */
-    --success-color: #2ecc71; /* Màu xanh lá cho kênh Green */
-    --warning-color: #f1c40f; /* Màu vàng (ít dùng trong UI này) */
+    --danger-color: #e74c3c;
+    --success-color: #2ecc71;
+    --warning-color: #f1c40f;
     --border-radius-sm: 4px;
     --border-radius-md: 8px;
     --border-radius-lg: 16px;
@@ -48,6 +48,7 @@ body {
     padding: 30px 15px;
 }
 
+/* --- App Container --- */
 .app-container {
     background-color: var(--primary-bg);
     width: 100%;
@@ -60,26 +61,28 @@ body {
     position: relative;
 }
 
+/* --- Screen Management --- */
 .screen {
     width: 100%;
     min-height: 750px;
-    display: none;
+    display: none; /* Hidden by default */
     flex-direction: column;
     opacity: 0;
     transition: opacity var(--transition-speed) ease-in-out;
-    position: absolute;
+    position: absolute; /* For smooth transitions if needed */
     top: 0;
     left: 0;
-    visibility: hidden;
+    visibility: hidden; /* Hide from accessibility tree */
 }
 
 .screen.active {
-    display: flex;
+    display: flex; /* Show active screen */
     opacity: 1;
-    position: relative;
+    position: relative; /* Bring back to normal flow */
     visibility: visible;
 }
 
+/* --- Upload Screen --- */
 #upload-screen .upload-content {
     display: flex;
     flex-direction: column;
@@ -152,8 +155,9 @@ body {
     transform: translateY(0px);
 }
 
+/* --- Editor Screen --- */
 #editor-screen {
-    /* Styles inherited from .screen */
+    /* Inherits .screen styles */
 }
 
 .editor-header {
@@ -163,8 +167,8 @@ body {
     padding: 12px 15px;
     border-bottom: 1px solid var(--border-color);
     background-color: var(--primary-bg);
-    flex-shrink: 0;
-    position: sticky;
+    flex-shrink: 0; /* Prevent header from shrinking */
+    position: sticky; /* Keep header visible when scrolling */
     top: 0;
     z-index: 10;
 }
@@ -173,8 +177,8 @@ body {
     font-size: 18px;
     font-weight: 600;
     color: var(--text-primary);
-    margin: 0 auto;
-    padding: 0 40px;
+    margin: 0 auto; /* Center title horizontally */
+    padding: 0 40px; /* Ensure space from buttons */
     text-align: center;
 }
 
@@ -187,22 +191,27 @@ body {
     transition: background-color var(--transition-speed) ease;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 6px; /* Space between icon and text (if any) */
     color: var(--text-secondary);
-    position: absolute;
+    position: absolute; /* Position relative to header */
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-50%); /* Vertical centering */
 }
-.header-button#backButton { left: 10px; }
-.header-button#saveButton { right: 10px; }
 
+.header-button#backButton {
+    left: 10px;
+}
+
+.header-button#saveButton {
+    right: 10px;
+}
 
 .header-button:hover {
     background-color: #f0f2f5;
 }
 
 .icon-button svg {
-    stroke-width: 2;
+    stroke-width: 2; /* Consistent icon stroke */
 }
 
 .save-button {
@@ -210,7 +219,7 @@ body {
     color: var(--accent-color);
     font-weight: 600;
     font-size: 14px;
-    padding: 8px 15px;
+    padding: 8px 15px; /* Specific padding */
 }
 
 .save-button:hover {
@@ -218,15 +227,16 @@ body {
 }
 
 .save-button svg {
-    stroke: var(--accent-color);
+    stroke: var(--accent-color); /* Match icon color to text */
 }
 
+/* --- Editor Main Content Area --- */
 .editor-main-content {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+    flex-grow: 1; /* Take remaining vertical space */
     background-color: var(--primary-bg);
-    overflow-y: auto;
+    overflow-y: auto; /* Allow scrolling if content overflows */
 }
 
 .image-preview-container {
@@ -234,38 +244,40 @@ body {
     justify-content: center;
     align-items: center;
     padding: 25px;
-    background-color: #eef2f7;
-    min-height: 300px;
-    overflow: hidden;
+    background-color: #eef2f7; /* Slight contrast for preview area */
+    min-height: 300px; /* Ensure minimum height */
+    overflow: hidden; /* Prevent large images from breaking layout */
 }
 
 #imageCanvas {
     max-width: 100%;
-    max-height: 450px;
-    object-fit: contain;
-    display: block;
+    max-height: 450px; /* Limit canvas height */
+    object-fit: contain; /* Maintain aspect ratio */
+    display: block; /* Remove extra space below canvas */
     border-radius: var(--border-radius-sm);
     box-shadow: var(--shadow-sm);
 }
 
+/* --- Controls Area --- */
 .controls-area {
     background-color: var(--secondary-bg);
     padding: 20px 20px 15px 20px;
     border-top: 1px solid var(--border-color);
-    flex-shrink: 0;
+    flex-shrink: 0; /* Prevent controls area from shrinking */
 }
 
+/* --- Tabs --- */
 .edit-tabs {
     display: flex;
     margin-bottom: 25px;
-    background-color: #e8eaf0;
+    background-color: #e8eaf0; /* Tab bar background */
     border-radius: var(--border-radius-pill);
     padding: 4px;
     overflow: hidden;
 }
 
 .tab-button {
-    flex-grow: 1;
+    flex-grow: 1; /* Distribute space evenly */
     text-align: center;
     background: none;
     border: none;
@@ -276,35 +288,36 @@ body {
     cursor: pointer;
     border-radius: var(--border-radius-pill);
     transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
-    white-space: nowrap;
+    white-space: nowrap; /* Prevent text wrapping */
 }
 
 .tab-button.active {
-    background-color: var(--primary-bg);
-    color: var(--accent-color);
+    background-color: var(--primary-bg); /* Active tab background */
+    color: var(--accent-color); /* Active tab text color */
     font-weight: 600;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); /* Active tab shadow */
 }
 
 .tab-button:not(.active):hover {
-    color: var(--text-primary);
+    color: var(--text-primary); /* Hover color for inactive tabs */
 }
 
+/* --- Control Panels --- */
 #control-panels {
-    position: relative;
-    min-height: 150px;
+    position: relative; /* Needed for potential panel transition effects */
+    min-height: 150px; /* Ensure space for controls */
 }
 
 .control-panel {
-    display: none;
+    display: none; /* Hidden by default */
     opacity: 0;
-    transition: opacity 0.15s ease-in-out;
-}
-.control-panel.active {
-    display: block;
-    opacity: 1;
+    transition: opacity 0.15s ease-in-out; /* Fade transition */
 }
 
+.control-panel.active {
+    display: block; /* Show active panel */
+    opacity: 1;
+}
 
 .panel-description {
     font-size: 13px;
@@ -313,29 +326,31 @@ body {
     text-align: center;
 }
 
+/* --- Control Groups and Items --- */
 .control-group {
-    margin-bottom: 25px;
-}
-
-.toggle-group {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px 0;
+    margin-bottom: 25px; /* Space between groups of controls */
 }
 
 .control-item {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
+    display: flex; /* Default layout for items */
+    margin-bottom: 20px; /* Space below each control item */
 }
 
+/* Default Text Label Styling (can be overridden) */
 .control-item label:first-child {
     font-size: 14px;
     font-weight: 500;
     color: var(--text-primary);
-    margin-bottom: 10px;
     display: block;
+}
+
+/* --- Slider Controls Styling --- */
+.slider-control {
+    flex-direction: column; /* Label above slider */
+}
+
+.slider-control label:first-child {
+    margin-bottom: 10px; /* Space between label and slider wrapper */
 }
 
 .slider-control .slider-wrapper {
@@ -345,21 +360,22 @@ body {
 }
 
 .slider-control input[type="range"] {
-    flex-grow: 1;
-    margin-right: 15px;
+    flex-grow: 1; /* Slider takes most space */
+    margin-right: 15px; /* Space before value display */
     height: var(--slider-track-height);
     cursor: pointer;
-    appearance: none;
-    background: transparent;
+    appearance: none; /* Remove default appearance */
+    background: transparent; /* Needed for custom track */
     border-radius: var(--border-radius-pill);
     outline: none;
 }
 
+/* Slider Track */
 .slider-control input[type="range"]::-webkit-slider-runnable-track {
     width: 100%;
     height: var(--slider-track-height);
     cursor: pointer;
-    background: #dce1e9;
+    background: #dce1e9; /* Track color */
     border-radius: var(--border-radius-pill);
     transition: background-color var(--transition-speed) ease;
 }
@@ -369,23 +385,28 @@ body {
     cursor: pointer;
     background: #dce1e9;
     border-radius: var(--border-radius-pill);
-    border: none;
+    border: none; /* Required for Firefox */
     transition: background-color var(--transition-speed) ease;
 }
 
-.slider-control input[type="range"]:hover::-webkit-slider-runnable-track { background: #ced5e0; }
-.slider-control input[type="range"]:hover::-moz-range-track { background: #ced5e0; }
+.slider-control input[type="range"]:hover::-webkit-slider-runnable-track {
+    background: #ced5e0; /* Darker track on hover */
+}
+.slider-control input[type="range"]:hover::-moz-range-track {
+    background: #ced5e0;
+}
 
+/* Slider Thumb (Handle) */
 .slider-control input[type="range"]::-webkit-slider-thumb {
     appearance: none;
-    margin-top: calc((var(--slider-thumb-size) - var(--slider-track-height)) / -2);
+    margin-top: calc((var(--slider-thumb-size) - var(--slider-track-height)) / -2); /* Center thumb vertically */
     height: var(--slider-thumb-size);
     width: var(--slider-thumb-size);
-    background: var(--accent-color);
-    border-radius: 50%;
+    background: var(--accent-color); /* Thumb color */
+    border-radius: 50%; /* Make it round */
     cursor: pointer;
     border: none;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Slight shadow */
     transition: transform 0.1s ease, background-color var(--transition-speed) ease;
 }
 .slider-control input[type="range"]::-moz-range-thumb {
@@ -400,49 +421,59 @@ body {
 }
 
 .slider-control input[type="range"]:active::-webkit-slider-thumb {
-    transform: scale(1.15);
-    background-color: var(--accent-color-dark);
+    transform: scale(1.15); /* Enlarge thumb when dragging */
+    background-color: var(--accent-color-dark); /* Darker thumb when active */
 }
 .slider-control input[type="range"]:active::-moz-range-thumb {
     transform: scale(1.15);
     background-color: var(--accent-color-dark);
 }
 
+/* Slider Value Display */
 .slider-value {
     font-size: 13px;
     font-weight: 500;
     color: var(--text-secondary);
-    min-width: 45px;
+    min-width: 45px; /* Ensure enough space for text */
     text-align: right;
-    background-color: #e8eaf0;
+    background-color: #e8eaf0; /* Subtle background */
     padding: 3px 8px;
     border-radius: var(--border-radius-sm);
 }
 
+/* --- Toggle Switch Styling --- */
 .toggle-control {
+    display: flex; /* Label and switch on the same row */
     flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 5px 0;
+    align-items: center; /* Vertically align label and switch */
+    padding: 8px 0;
+    margin-bottom: 5px;
 }
 
+/* Text label for the toggle (e.g., "Đỏ", "Grayscale") */
 .toggle-control label:first-child {
-    margin-bottom: 0;
+    margin-bottom: 0; /* Remove bottom margin for row layout */
+    margin-right: 15px; /* Space between text label and switch component */
+    flex-grow: 1; /* Allow label to take available space */
 }
 
+/* The switch component container (label wrapping input and span) */
 .switch {
     position: relative;
     display: inline-block;
     width: var(--toggle-width);
     height: var(--toggle-height);
+    flex-shrink: 0; /* Prevent switch from shrinking */
 }
 
+/* Hide the actual checkbox */
 .switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
 
+/* The track/background of the switch */
 .switch .slider {
     position: absolute;
     cursor: pointer;
@@ -450,40 +481,56 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccd5e2;
+    background-color: #ccd5e2; /* Off state background */
     transition: background-color var(--transition-speed) ease;
 }
 
+/* The handle/thumb of the switch */
 .switch .slider:before {
     position: absolute;
     content: "";
     height: var(--toggle-thumb-size);
     width: var(--toggle-thumb-size);
-    left: 3px;
-    bottom: 3px;
+    left: 3px; /* Padding from left edge */
+    bottom: 3px; /* Padding from bottom edge */
     background-color: white;
     box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    transition: transform var(--transition-speed) ease;
+    transition: transform var(--transition-speed) ease; /* Animate movement */
 }
 
-.switch input:checked + .slider { background-color: var(--accent-color); }
+/* Specific colors for RGB toggles when checked (ON) */
 .switch input:checked + .slider.red { background-color: var(--danger-color); }
 .switch input:checked + .slider.green { background-color: var(--success-color); }
 .switch input:checked + .slider.blue { background-color: var(--accent-color); }
 
-.switch input:focus + .slider { box-shadow: 0 0 1px var(--accent-color); }
-
-.switch input:checked + .slider:before {
-    transform: translateX(calc(var(--toggle-width) - var(--toggle-thumb-size) - 6px));
+/* Default color for other toggles when checked (ON) */
+.switch input:checked + .slider:not(.red):not(.green):not(.blue) {
+    background-color: var(--accent-color);
 }
 
-.switch .slider.round { border-radius: var(--toggle-height); }
-.switch .slider.round:before { border-radius: 50%; }
+/* Focus outline for accessibility */
+.switch input:focus + .slider {
+    box-shadow: 0 0 1px var(--accent-color);
+}
 
+/* Move the thumb when checked */
+.switch input:checked + .slider:before {
+    transform: translateX(calc(var(--toggle-width) - var(--toggle-thumb-size) - 6px)); /* Calculate ON position */
+}
+
+/* Rounded appearance */
+.switch .slider.round {
+    border-radius: var(--toggle-height); /* Make track rounded */
+}
+.switch .slider.round:before {
+    border-radius: 50%; /* Make thumb round */
+}
+
+/* --- Reset Button --- */
 .reset-button {
     display: block;
     width: 100%;
-    margin-top: 15px;
+    margin-top: 15px; /* Space above reset button */
     padding: 10px 20px;
     background-color: transparent;
     border: 1px solid var(--border-color);
@@ -500,4 +547,9 @@ body {
     background-color: #f0f2f5;
     border-color: #d0d8e0;
     color: var(--text-primary);
+}
+
+/* Optional: Reset styles for Grayscale toggle if needed */
+#effects-controls .control-item.toggle-control:has(#grayscaleToggle) {
+    /* Adjust styles if different layout is desired */
 }
