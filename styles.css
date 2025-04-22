@@ -1,97 +1,116 @@
-/* --- Biến CSS và Reset --- */
+/* --- Biến CSS (CSS Variables) --- */
+/* Định nghĩa các giá trị thường dùng giúp dễ dàng thay đổi theme hoặc thuộc tính */
 :root {
     --font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    --primary-bg: #ffffff;
-    --secondary-bg: #f7f8fc;
-    --border-color: #e8eaf0;
-    --text-primary: #2c3e50;
-    --text-secondary: #5a6a7d;
-    --accent-color: #007aff;
-    --accent-color-dark: #005ecb;
-    --accent-color-light: #e0f1ff;
-    --danger-color: #e74c3c;
-    --success-color: #2ecc71;
-    --warning-color: #f1c40f;
-    --border-radius-sm: 4px;
-    --border-radius-md: 8px;
-    --border-radius-lg: 16px;
-    --border-radius-pill: 50px;
-    --shadow-sm: 0 2px 4px rgba(44, 62, 80, 0.05);
-    --shadow-md: 0 5px 15px rgba(44, 62, 80, 0.1);
-    --transition-speed: 0.2s;
-    --slider-track-height: 6px;
-    --slider-thumb-size: 18px;
-    --toggle-width: 48px;
-    --toggle-height: 26px;
-    --toggle-thumb-size: 20px;
+    --primary-bg: #ffffff; /* Nền chính, thường dùng cho container app */
+    --secondary-bg: #f7f8fc; /* Nền phụ, thường dùng cho khu vực controls */
+    --border-color: #e8eaf0; /* Màu đường viền */
+    --text-primary: #2c3e50; /* Màu chữ chính */
+    --text-secondary: #5a6a7d; /* Màu chữ phụ, thường dùng cho mô tả hoặc inactive */
+    --accent-color: #007aff; /* Màu nhấn chính (xanh dương của Apple) */
+    --accent-color-dark: #005ecb; /* Màu nhấn đậm hơn khi hover/active */
+    --accent-color-light: #e0f1ff; /* Màu nhấn nhạt, dùng cho nền nút */
+    --danger-color: #e74c3c; /* Màu đỏ, dùng cho lỗi hoặc cảnh báo (đỏ trong RGB toggle) */
+    --success-color: #2ecc71; /* Màu xanh lá, dùng cho thành công (xanh lá trong RGB toggle) */
+    --warning-color: #f1c40f; /* Màu vàng (không dùng nhiều trong code này, nhưng tốt để có) */
+    --border-radius-sm: 4px; /* Góc bo nhỏ */
+    --border-radius-md: 8px; /* Góc bo trung bình */
+    --border-radius-lg: 16px; /* Góc bo lớn */
+    --border-radius-pill: 50px; /* Góc bo dạng viên thuốc */
+    --shadow-sm: 0 2px 4px rgba(44, 62, 80, 0.05); /* Đổ bóng nhỏ */
+    --shadow-md: 0 5px 15px rgba(44, 62, 80, 0.1); /* Đổ bóng trung bình */
+    --transition-speed: 0.2s; /* Tốc độ hiệu ứng chuyển đổi mặc định */
+    --slider-track-height: 6px; /* Chiều cao thanh trượt (track) */
+    --slider-thumb-size: 18px; /* Kích thước nút kéo trên thanh trượt (thumb) */
+    --toggle-width: 48px; /* Chiều rộng nút bật/tắt (switch) */
+    --toggle-height: 26px; /* Chiều cao nút bật/tắt */
+    --toggle-thumb-size: 20px; /* Kích thước nút trên nút bật/tắt */
 }
 
+/* --- Reset CSS --- */
+/* Loại bỏ padding và margin mặc định của trình duyệt, đặt box-sizing */
 * {
-    box-sizing: border-box;
+    box-sizing: border-box; /* Tính cả padding và border vào width/height */
     margin: 0;
     padding: 0;
 }
 
+/* Áp dụng cuộn mượt khi dùng anchor links */
 html {
     scroll-behavior: smooth;
 }
 
+/* --- Base Body Styles --- */
+/* Định kiểu cho toàn bộ trang */
 body {
-    font-family: var(--font-family);
-    background-color: #eef2f7;
-    color: var(--text-primary);
-    line-height: 1.6;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
-    padding: 30px 15px;
+    font-family: var(--font-family); /* Áp dụng font chữ */
+    background-color: #eef2f7; /* Nền trang */
+    color: var(--text-primary); /* Màu chữ mặc định */
+    line-height: 1.6; /* Khoảng cách dòng */
+    display: flex; /* Sử dụng flexbox để căn giữa container */
+    justify-content: center; /* Căn giữa ngang */
+    align-items: flex-start; /* Căn trên dọc */
+    min-height: 100vh; /* Chiều cao tối thiểu bằng chiều cao viewport */
+    padding: 30px 15px; /* Padding xung quanh nội dung */
+    overflow-y: auto; /* Cho phép cuộn nếu nội dung body tràn */
 }
 
 /* --- App Container --- */
+/* Container chính của ứng dụng */
 .app-container {
     background-color: var(--primary-bg);
     width: 100%;
-    max-width: 420px;
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-md);
-    overflow: hidden;
+    max-width: 420px; /* Chiều rộng tối đa của ứng dụng */
+    border-radius: var(--border-radius-lg); /* Góc bo lớn */
+    box-shadow: var(--shadow-md); /* Đổ bóng trung bình */
+    overflow: hidden; /* Cắt bỏ nội dung tràn ra ngoài góc bo */
     display: flex;
-    flex-direction: column;
-    position: relative;
+    flex-direction: column; /* Sắp xếp các phần tử con (màn hình) theo chiều dọc */
+    position: relative; /* Cần thiết cho định vị absolute của các màn hình */
+    min-height: 750px; /* Chiều cao tối thiểu của container */
 }
 
 /* --- Screen Management --- */
+/* Định kiểu chung cho các màn hình (tải ảnh, chỉnh sửa) */
 .screen {
     width: 100%;
-    min-height: 750px;
-    display: none; /* Hidden by default */
-    flex-direction: column;
-    opacity: 0;
-    transition: opacity var(--transition-speed) ease-in-out;
-    position: absolute; /* For smooth transitions if needed */
+    min-height: inherit; /* Kế thừa chiều cao tối thiểu từ app-container */
+    display: none; /* Mặc định ẩn */
+    flex-direction: column; /* Nội dung trong màn hình xếp dọc */
+    opacity: 0; /* Mặc định trong suốt */
+    transition: opacity var(--transition-speed) ease-in-out; /* Hiệu ứng mờ dần/hiện dần */
+    position: absolute; /* Đặt các màn hình chồng lên nhau */
     top: 0;
     left: 0;
-    visibility: hidden; /* Hide from accessibility tree */
+    visibility: hidden; /* Ẩn khỏi cây accessibility khi không active */
+    pointer-events: none; /* Không tương tác khi không active */
 }
 
+/* Định kiểu cho màn hình đang hiển thị */
 .screen.active {
-    display: flex; /* Show active screen */
-    opacity: 1;
-    position: relative; /* Bring back to normal flow */
-    visibility: visible;
+    display: flex; /* Hiện màn hình */
+    opacity: 1; /* Hiển thị đầy đủ */
+    position: relative; /* Đưa về luồng tài liệu bình thường */
+    visibility: visible; /* Hiện lại trong cây accessibility */
+    pointer-events: auto; /* Cho phép tương tác */
 }
 
 /* --- Upload Screen --- */
+/* Định kiểu riêng cho màn hình tải ảnh */
+#upload-screen {
+    /* Kế thừa .screen styles */
+    justify-content: center; /* Căn giữa nội dung trong màn hình upload */
+}
+
 #upload-screen .upload-content {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: center; /* Căn giữa ngang các phần tử con */
+    justify-content: center; /* Căn giữa dọc các phần tử con (flex-grow: 1) */
     padding: 50px 30px;
     text-align: center;
-    flex-grow: 1;
-    min-height: inherit;
+    flex-grow: 1; /* Chiếm hết không gian dọc còn trống */
+    width: 100%; /* Đảm bảo nội dung chiếm hết chiều rộng */
 }
 
 .app-title {
@@ -101,11 +120,12 @@ body {
     color: var(--text-primary);
 }
 
+/* Khu vực kéo và thả ảnh */
 .image-placeholder {
     width: 100%;
     max-width: 300px;
     height: 200px;
-    border: 2px dashed var(--border-color);
+    border: 2px dashed var(--border-color); /* Viền nét đứt */
     border-radius: var(--border-radius-md);
     display: flex;
     flex-direction: column;
@@ -113,18 +133,28 @@ body {
     align-items: center;
     margin-bottom: 35px;
     background-color: var(--secondary-bg);
-    cursor: pointer;
-    transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+    cursor: pointer; /* Biến con trỏ thành pointer khi rê chuột */
+    transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease, border-style var(--transition-speed) ease; /* Thêm transition cho border-style */
 }
 
+/* Hiệu ứng khi rê chuột qua khu vực kéo thả */
 .image-placeholder:hover {
     background-color: #f0f2f5;
     border-color: #d0d8e0;
 }
 
+/* Hiệu ứng khi kéo file *qua* khu vực kéo thả (dành cho chức năng kéo thả) */
+.image-placeholder.drag-over {
+    background-color: var(--accent-color-light); /* Nền màu nhấn nhạt */
+    border-color: var(--accent-color); /* Viền màu nhấn */
+    border-style: solid; /* Đổi viền nét liền */
+}
+
+
 .placeholder-icon {
-    color: #a0b0c0;
+    color: #a0b0c0; /* Màu icon xám */
     margin-bottom: 15px;
+    stroke-width: 1.5; /* Độ dày nét vẽ icon */
 }
 
 .image-placeholder p {
@@ -133,6 +163,7 @@ body {
     max-width: 80%;
 }
 
+/* Nút chọn ảnh */
 .upload-button {
     display: inline-block;
     background-color: var(--accent-color);
@@ -142,24 +173,30 @@ body {
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color var(--transition-speed) ease, transform 0.1s ease;
+    transition: background-color var(--transition-speed) ease, transform 0.1s ease; /* Thêm transform cho hiệu ứng nhấn */
     box-shadow: 0 4px 10px rgba(0, 122, 255, 0.2);
+    border: none; /* Đảm bảo không có viền mặc định của button/label */
+    text-decoration: none; /* Đảm bảo không có gạch chân nếu dùng thẻ a */
 }
 
 .upload-button:hover {
     background-color: var(--accent-color-dark);
-    transform: translateY(-1px);
+    transform: translateY(-1px); /* Nhấc nhẹ nút lên khi hover */
 }
 
 .upload-button:active {
-    transform: translateY(0px);
+    transform: translateY(0px); /* Trở lại vị trí cũ khi nhấn */
+    box-shadow: 0 2px 5px rgba(0, 122, 255, 0.3); /* Đổ bóng nhỏ hơn khi nhấn */
 }
+
 
 /* --- Editor Screen --- */
+/* Định kiểu riêng cho màn hình chỉnh sửa */
 #editor-screen {
-    /* Inherits .screen styles */
+    /* Kế thừa .screen styles */
 }
 
+/* Header của màn hình chỉnh sửa */
 .editor-header {
     display: flex;
     justify-content: space-between;
@@ -167,21 +204,24 @@ body {
     padding: 12px 15px;
     border-bottom: 1px solid var(--border-color);
     background-color: var(--primary-bg);
-    flex-shrink: 0; /* Prevent header from shrinking */
-    position: sticky; /* Keep header visible when scrolling */
+    flex-shrink: 0; /* Ngăn header co lại */
+    position: sticky; /* Giữ header cố định khi cuộn nội dung chính */
     top: 0;
-    z-index: 10;
+    z-index: 10; /* Đảm bảo header nằm trên các nội dung khác khi cuộn */
+    width: 100%; /* Đảm bảo header chiếm toàn bộ chiều rộng */
 }
 
 .editor-title {
     font-size: 18px;
     font-weight: 600;
     color: var(--text-primary);
-    margin: 0 auto; /* Center title horizontally */
-    padding: 0 40px; /* Ensure space from buttons */
+    margin: 0 auto; /* Căn giữa tiêu đề */
+    padding: 0 40px; /* Đảm bảo có khoảng trống cho các nút ở hai bên */
     text-align: center;
+    flex-grow: 1; /* Cho phép tiêu đề giãn ra nếu cần */
 }
 
+/* Định kiểu chung cho các nút trong header */
 .header-button {
     background: none;
     border: none;
@@ -191,35 +231,41 @@ body {
     transition: background-color var(--transition-speed) ease;
     display: flex;
     align-items: center;
-    gap: 6px; /* Space between icon and text (if any) */
+    gap: 6px; /* Khoảng cách giữa icon và text */
     color: var(--text-secondary);
-    position: absolute; /* Position relative to header */
-    top: 50%;
-    transform: translateY(-50%); /* Vertical centering */
+    position: absolute; /* Định vị tuyệt đối trong header */
+    top: 50%; /* Đặt ở giữa chiều cao header */
+    transform: translateY(-50%); /* Dịch chuyển lên 50% chiều cao của nút để căn giữa thật sự */
 }
 
+/* Định vị nút quay lại */
 .header-button#backButton {
     left: 10px;
+    padding: 8px; /* Padding đồng nhất */
 }
 
+/* Định vị nút lưu */
 .header-button#saveButton {
     right: 10px;
+    padding: 8px 15px; /* Padding cụ thể cho nút lưu */
 }
 
 .header-button:hover {
     background-color: #f0f2f5;
 }
 
+/* Định kiểu cho icon trong nút */
 .icon-button svg {
-    stroke-width: 2; /* Consistent icon stroke */
+    stroke-width: 2; /* Độ dày nét vẽ icon */
+    display: block; /* Loại bỏ khoảng trắng dưới icon */
 }
 
+/* Định kiểu riêng cho nút lưu */
 .save-button {
     background-color: var(--accent-color-light);
     color: var(--accent-color);
     font-weight: 600;
     font-size: 14px;
-    padding: 8px 15px; /* Specific padding */
 }
 
 .save-button:hover {
@@ -227,57 +273,63 @@ body {
 }
 
 .save-button svg {
-    stroke: var(--accent-color); /* Match icon color to text */
+    stroke: var(--accent-color); /* Đảm bảo màu icon khớp với màu text */
 }
 
 /* --- Editor Main Content Area --- */
+/* Khu vực chứa ảnh xem trước và controls */
 .editor-main-content {
     display: flex;
     flex-direction: column;
-    flex-grow: 1; /* Take remaining vertical space */
+    flex-grow: 1; /* Chiếm hết không gian dọc còn lại */
     background-color: var(--primary-bg);
-    overflow-y: auto; /* Allow scrolling if content overflows */
+    overflow-y: auto; /* Cho phép cuộn nếu nội dung (controls) tràn */
 }
 
+/* Container chứa canvas hiển thị ảnh */
 .image-preview-container {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 25px;
-    background-color: #eef2f7; /* Slight contrast for preview area */
-    min-height: 300px; /* Ensure minimum height */
-    overflow: hidden; /* Prevent large images from breaking layout */
+    background-color: #eef2f7; /* Nền hơi khác để phân biệt khu vực preview */
+    min-height: 300px; /* Chiều cao tối thiểu cho khu vực preview */
+    flex-shrink: 0; /* Ngăn không cho co lại khi controls area quá lớn */
+    overflow: hidden; /* Ngăn ảnh tràn ra ngoài */
 }
 
+/* Canvas hiển thị ảnh */
 #imageCanvas {
-    max-width: 100%;
-    max-height: 450px; /* Limit canvas height */
-    object-fit: contain; /* Maintain aspect ratio */
-    display: block; /* Remove extra space below canvas */
+    max-width: 100%; /* Đảm bảo canvas không vượt quá chiều rộng container */
+    max-height: 450px; /* Giới hạn chiều cao canvas */
+    object-fit: contain; /* Giữ nguyên tỷ lệ khung hình */
+    display: block; /* Loại bỏ khoảng trắng dưới canvas */
     border-radius: var(--border-radius-sm);
     box-shadow: var(--shadow-sm);
 }
 
 /* --- Controls Area --- */
+/* Khu vực chứa các tab và điều khiển chỉnh sửa */
 .controls-area {
     background-color: var(--secondary-bg);
     padding: 20px 20px 15px 20px;
     border-top: 1px solid var(--border-color);
-    flex-shrink: 0; /* Prevent controls area from shrinking */
+    flex-shrink: 0; /* Ngăn controls area co lại */
 }
 
-/* --- Tabs --- */
+/* --- Tabs (Thanh chọn loại điều khiển) --- */
 .edit-tabs {
     display: flex;
     margin-bottom: 25px;
-    background-color: #e8eaf0; /* Tab bar background */
+    background-color: #e8eaf0; /* Nền thanh tab */
     border-radius: var(--border-radius-pill);
     padding: 4px;
     overflow: hidden;
 }
 
+/* Nút trong thanh tab */
 .tab-button {
-    flex-grow: 1; /* Distribute space evenly */
+    flex-grow: 1; /* Phân phối không gian đều cho các nút */
     text-align: center;
     background: none;
     border: none;
@@ -287,36 +339,41 @@ body {
     color: var(--text-secondary);
     cursor: pointer;
     border-radius: var(--border-radius-pill);
-    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
-    white-space: nowrap; /* Prevent text wrapping */
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, box-shadow var(--transition-speed) ease; /* Thêm box-shadow transition */
+    white-space: nowrap; /* Ngăn chữ xuống dòng */
+    outline: none; /* Loại bỏ outline mặc định khi focus */
 }
 
+/* Nút tab đang hoạt động */
 .tab-button.active {
-    background-color: var(--primary-bg); /* Active tab background */
-    color: var(--accent-color); /* Active tab text color */
+    background-color: var(--primary-bg); /* Nền trắng */
+    color: var(--accent-color); /* Chữ màu nhấn */
     font-weight: 600;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); /* Active tab shadow */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); /* Đổ bóng nhẹ */
 }
 
+/* Hiệu ứng hover cho nút tab không hoạt động */
 .tab-button:not(.active):hover {
-    color: var(--text-primary); /* Hover color for inactive tabs */
+    color: var(--text-primary);
 }
 
-/* --- Control Panels --- */
+/* --- Control Panels (Nội dung của từng tab) --- */
 #control-panels {
-    position: relative; /* Needed for potential panel transition effects */
-    min-height: 150px; /* Ensure space for controls */
+    position: relative; /* Cần thiết cho định vị tuyệt đối nếu muốn hiệu ứng phức tạp */
+    min-height: 150px; /* Đảm bảo có không gian cho nội dung panel */
 }
 
+/* Định kiểu chung cho các panel */
 .control-panel {
-    display: none; /* Hidden by default */
+    display: none; /* Mặc định ẩn */
     opacity: 0;
-    transition: opacity 0.15s ease-in-out; /* Fade transition */
+    transition: opacity 0.15s ease-in-out; /* Hiệu ứng hiện/ẩn mượt mà */
 }
 
+/* Panel đang hoạt động */
 .control-panel.active {
-    display: block; /* Show active panel */
-    opacity: 1;
+    display: block; /* Hiện panel */
+    opacity: 1; /* Hiện đầy đủ */
 }
 
 .panel-description {
@@ -327,88 +384,105 @@ body {
 }
 
 /* --- Control Groups and Items --- */
+/* Nhóm các control cùng loại (ví dụ: 3 toggle RGB, 3 slider cơ bản) */
 .control-group {
-    margin-bottom: 25px; /* Space between groups of controls */
+    margin-bottom: 25px; /* Khoảng cách giữa các nhóm */
 }
 
+/* Một dòng control đơn lẻ (label + input/switch) */
 .control-item {
-    display: flex; /* Default layout for items */
-    margin-bottom: 20px; /* Space below each control item */
+    display: flex; /* Sử dụng flexbox cho layout mặc định */
+    align-items: center; /* Căn giữa dọc nội dung trong item */
+    margin-bottom: 15px; /* Khoảng cách dưới mỗi item */
+    /* margin-bottom: 20px; */ /* Adjust based on preference, 15px might be better */
+}
+.control-group:last-child .control-item:last-child {
+    margin-bottom: 0; /* Loại bỏ margin cuối cùng trong nhóm cuối cùng */
 }
 
-/* Default Text Label Styling (can be overridden) */
+/* Định kiểu chung cho label của control */
 .control-item label:first-child {
     font-size: 14px;
     font-weight: 500;
     color: var(--text-primary);
-    display: block;
+    display: block; /* Đảm bảo label là block element */
+    flex-shrink: 0; /* Ngăn label co lại */
+    margin-right: 15px; /* Khoảng cách giữa label và control */
 }
 
 /* --- Slider Controls Styling --- */
+/* Định kiểu riêng cho item chứa slider */
 .slider-control {
-    flex-direction: column; /* Label above slider */
+    flex-direction: column; /* Label nằm trên slider */
+    align-items: flex-start; /* Căn trái label và wrapper */
 }
 
 .slider-control label:first-child {
-    margin-bottom: 10px; /* Space between label and slider wrapper */
+    margin-bottom: 10px; /* Khoảng cách giữa label và wrapper slider */
+    margin-right: 0; /* Loại bỏ margin-right mặc định */
 }
 
+/* Wrapper chứa slider và giá trị */
 .slider-control .slider-wrapper {
     display: flex;
     align-items: center;
     width: 100%;
 }
 
+/* Input type="range" (thanh trượt) */
 .slider-control input[type="range"] {
-    flex-grow: 1; /* Slider takes most space */
-    margin-right: 15px; /* Space before value display */
+    flex-grow: 1; /* Chiếm hết không gian còn trống */
+    margin-right: 15px; /* Khoảng cách trước hiển thị giá trị */
     height: var(--slider-track-height);
     cursor: pointer;
-    appearance: none; /* Remove default appearance */
-    background: transparent; /* Needed for custom track */
+    appearance: none; /* Loại bỏ giao diện mặc định của trình duyệt */
+    background: transparent; /* Nền trong suốt để hiển thị track tùy chỉnh */
     border-radius: var(--border-radius-pill);
-    outline: none;
+    outline: none; /* Loại bỏ outline khi focus */
 }
 
-/* Slider Track */
+/* Thanh trượt (track) - Webkit browsers */
 .slider-control input[type="range"]::-webkit-slider-runnable-track {
     width: 100%;
     height: var(--slider-track-height);
     cursor: pointer;
-    background: #dce1e9; /* Track color */
+    background: #dce1e9; /* Màu track */
     border-radius: var(--border-radius-pill);
     transition: background-color var(--transition-speed) ease;
 }
+/* Thanh trượt (track) - Firefox */
 .slider-control input[type="range"]::-moz-range-track {
     width: 100%;
     height: var(--slider-track-height);
     cursor: pointer;
     background: #dce1e9;
     border-radius: var(--border-radius-pill);
-    border: none; /* Required for Firefox */
+    border: none; /* Cần thiết cho Firefox */
     transition: background-color var(--transition-speed) ease;
 }
 
+/* Hiệu ứng hover cho track */
 .slider-control input[type="range"]:hover::-webkit-slider-runnable-track {
-    background: #ced5e0; /* Darker track on hover */
+    background: #ced5e0; /* Màu track đậm hơn khi hover */
 }
 .slider-control input[type="range"]:hover::-moz-range-track {
     background: #ced5e0;
 }
 
-/* Slider Thumb (Handle) */
+/* Nút kéo (thumb) - Webkit browsers */
 .slider-control input[type="range"]::-webkit-slider-thumb {
-    appearance: none;
-    margin-top: calc((var(--slider-thumb-size) - var(--slider-track-height)) / -2); /* Center thumb vertically */
+    appearance: none; /* Loại bỏ giao diện mặc định */
+    margin-top: calc((var(--slider-thumb-size) - var(--slider-track-height)) / -2); /* Căn giữa nút kéo dọc theo track */
     height: var(--slider-thumb-size);
     width: var(--slider-thumb-size);
-    background: var(--accent-color); /* Thumb color */
-    border-radius: 50%; /* Make it round */
+    background: var(--accent-color); /* Màu nút kéo */
+    border-radius: 50%; /* Bo tròn */
     cursor: pointer;
     border: none;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Slight shadow */
-    transition: transform 0.1s ease, background-color var(--transition-speed) ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Đổ bóng nhẹ */
+    transition: transform 0.1s ease, background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
 }
+/* Nút kéo (thumb) - Firefox */
 .slider-control input[type="range"]::-moz-range-thumb {
     height: var(--slider-thumb-size);
     width: var(--slider-thumb-size);
@@ -417,63 +491,73 @@ body {
     cursor: pointer;
     border: none;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-    transition: transform 0.1s ease, background-color var(--transition-speed) ease;
+    transition: transform 0.1s ease, background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
 }
 
+/* Hiệu ứng khi kéo nút */
 .slider-control input[type="range"]:active::-webkit-slider-thumb {
-    transform: scale(1.15); /* Enlarge thumb when dragging */
-    background-color: var(--accent-color-dark); /* Darker thumb when active */
+    transform: scale(1.15); /* Phóng to nút khi kéo */
+    background-color: var(--accent-color-dark); /* Màu đậm hơn khi kéo */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 .slider-control input[type="range"]:active::-moz-range-thumb {
     transform: scale(1.15);
     background-color: var(--accent-color-dark);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-/* Slider Value Display */
+/* Hiển thị giá trị của slider */
 .slider-value {
     font-size: 13px;
     font-weight: 500;
     color: var(--text-secondary);
-    min-width: 45px; /* Ensure enough space for text */
+    min-width: 45px; /* Đảm bảo đủ chỗ cho text (ví dụ: 100%) */
     text-align: right;
-    background-color: #e8eaf0; /* Subtle background */
+    background-color: #e8eaf0; /* Nền nhẹ cho giá trị */
     padding: 3px 8px;
     border-radius: var(--border-radius-sm);
+    flex-shrink: 0; /* Ngăn co lại */
 }
 
 /* --- Toggle Switch Styling --- */
+/* Định kiểu riêng cho item chứa toggle switch */
 .toggle-control {
-    display: flex; /* Label and switch on the same row */
-    flex-direction: row;
-    align-items: center; /* Vertically align label and switch */
-    padding: 8px 0;
-    margin-bottom: 5px;
+    display: flex; /* Label và switch trên cùng một hàng */
+    flex-direction: row; /* Sắp xếp theo hàng ngang */
+    align-items: center; /* Căn giữa dọc */
+    padding: 8px 0; /* Padding dọc cho mỗi item toggle */
+    margin-bottom: 5px; /* Khoảng cách dưới mỗi item toggle (ít hơn slider) */
+}
+.control-group:last-child .toggle-control:last-child {
+    margin-bottom: 0; /* Loại bỏ margin cuối cùng trong nhóm cuối cùng */
 }
 
-/* Text label for the toggle (e.g., "Đỏ", "Grayscale") */
+
+/* Label text cho toggle */
 .toggle-control label:first-child {
-    margin-bottom: 0; /* Remove bottom margin for row layout */
-    margin-right: 15px; /* Space between text label and switch component */
-    flex-grow: 1; /* Allow label to take available space */
+    margin-bottom: 0; /* Loại bỏ margin-bottom mặc định của label khi ở dạng cột */
+    margin-right: 15px; /* Khoảng cách giữa label và switch */
+    flex-grow: 1; /* Cho phép label chiếm hết không gian còn trống */
+    cursor: pointer; /* Biến con trỏ thành pointer khi rê chuột */
 }
 
-/* The switch component container (label wrapping input and span) */
+/* Container của switch (thẻ label bao quanh input và span) */
 .switch {
     position: relative;
     display: inline-block;
     width: var(--toggle-width);
     height: var(--toggle-height);
-    flex-shrink: 0; /* Prevent switch from shrinking */
+    flex-shrink: 0; /* Ngăn switch co lại */
 }
 
-/* Hide the actual checkbox */
+/* Ẩn input checkbox mặc định */
 .switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
 
-/* The track/background of the switch */
+/* Thanh trượt (track) của switch */
 .switch .slider {
     position: absolute;
     cursor: pointer;
@@ -481,56 +565,58 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccd5e2; /* Off state background */
+    background-color: #ccd5e2; /* Màu nền khi tắt */
     transition: background-color var(--transition-speed) ease;
 }
 
-/* The handle/thumb of the switch */
+/* Nút (thumb) của switch */
 .switch .slider:before {
     position: absolute;
-    content: "";
+    content: ""; /* Nội dung rỗng để tạo hình */
     height: var(--toggle-thumb-size);
     width: var(--toggle-thumb-size);
-    left: 3px; /* Padding from left edge */
-    bottom: 3px; /* Padding from bottom edge */
+    left: 3px; /* Khoảng cách từ mép trái track */
+    bottom: 3px; /* Khoảng cách từ mép dưới track */
     background-color: white;
     box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    transition: transform var(--transition-speed) ease; /* Animate movement */
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease; /* Hiệu ứng di chuyển và đổ bóng */
 }
 
-/* Specific colors for RGB toggles when checked (ON) */
+/* Màu sắc riêng cho track của các toggle RGB khi BẬT */
 .switch input:checked + .slider.red { background-color: var(--danger-color); }
 .switch input:checked + .slider.green { background-color: var(--success-color); }
 .switch input:checked + .slider.blue { background-color: var(--accent-color); }
 
-/* Default color for other toggles when checked (ON) */
+/* Màu sắc mặc định cho track của các toggle khác khi BẬT */
 .switch input:checked + .slider:not(.red):not(.green):not(.blue) {
     background-color: var(--accent-color);
 }
 
-/* Focus outline for accessibility */
+/* Hiệu ứng focus cho accessibility */
 .switch input:focus + .slider {
     box-shadow: 0 0 1px var(--accent-color);
 }
 
-/* Move the thumb when checked */
+/* Di chuyển nút thumb khi BẬT */
 .switch input:checked + .slider:before {
-    transform: translateX(calc(var(--toggle-width) - var(--toggle-thumb-size) - 6px)); /* Calculate ON position */
+    transform: translateX(calc(var(--toggle-width) - var(--toggle-thumb-size) - 6px)); /* Tính toán vị trí ON */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
-/* Rounded appearance */
+/* Làm tròn switch */
 .switch .slider.round {
-    border-radius: var(--toggle-height); /* Make track rounded */
+    border-radius: var(--toggle-height); /* Làm tròn track */
 }
 .switch .slider.round:before {
-    border-radius: 50%; /* Make thumb round */
+    border-radius: 50%; /* Làm tròn thumb */
 }
+
 
 /* --- Reset Button --- */
 .reset-button {
-    display: block;
+    display: block; /* Hiển thị dạng block để chiếm hết chiều rộng */
     width: 100%;
-    margin-top: 15px; /* Space above reset button */
+    margin-top: 20px; /* Khoảng cách trên nút reset */
     padding: 10px 20px;
     background-color: transparent;
     border: 1px solid var(--border-color);
@@ -541,6 +627,7 @@ body {
     cursor: pointer;
     text-align: center;
     transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+    outline: none;
 }
 
 .reset-button:hover {
@@ -549,7 +636,30 @@ body {
     color: var(--text-primary);
 }
 
-/* Optional: Reset styles for Grayscale toggle if needed */
-#effects-controls .control-item.toggle-control:has(#grayscaleToggle) {
-    /* Adjust styles if different layout is desired */
+.reset-button:active {
+    background-color: #e8eaf0;
+    border-color: #c0c8d0;
+}
+
+/* Optional: Điều chỉnh margin cuối cùng trong control area */
+.controls-area .control-group:last-child {
+    margin-bottom: 0;
+}
+
+/* Optional: Adjusting scrollbar for editor main content */
+.editor-main-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.editor-main-content::-webkit-scrollbar-track {
+    background: var(--secondary-bg);
+}
+
+.editor-main-content::-webkit-scrollbar-thumb {
+    background: #becbd8;
+    border-radius: 4px;
+}
+
+.editor-main-content::-webkit-scrollbar-thumb:hover {
+    background: #aab8c5;
 }
